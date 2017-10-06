@@ -19,10 +19,9 @@ $( document ).ready(function() {
       Course[i]  = {
         name : courseName,
         code : courseCode,
-      }
+      };
+      $( "#addCards" ).append( "Added " + Course[i].name + " with course code "+ Course[i].code + "<br>");
       i++;
-      console.log("course name  "+ Course[0].name);
-      console.log("global");
     });
     // adding courseData class to all input fields under addData class
 });
