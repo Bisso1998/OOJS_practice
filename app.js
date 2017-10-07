@@ -20,13 +20,19 @@ $(document ).ready(function() {
         name : courseName,
         code : courseCode,
       };
-      $( "#addCards" ).append( "<p id=" +i+  "> Added " + Course[i].name + " with course code "+ Course[i].code + "  <button id="+ i +  " "+'onClick="deleteMe('+ i +')"' +'> Delete </button>'   + "<br> </p>");
+      $( "#addCards" ).append( "<p id=" +i+"p"+  "> Added " + Course[i].name + " with course code "+ Course[i].code + "  <button id="+ i +  " "+'onClick="deleteMe('+ i +')"' +'> Delete </button>'   + "  <button id="+ i +  " "+'onclick="editMe('+ i +')"' +'> Edit </button>'+  "<br> </p>");
       i++;
     });
     // adding courseData class to all input fields under addData class
 });
 function deleteMe(i) {
   delete Course[i];
-  $('#'+i).remove();
+  $('#'+i+"p").remove();
+};
+function editMe(i) {
+  var name = prompt("Enter name....");
+  Course[i].name = name;
+  $( "#"+i+"p" ).html( "<p id=" +i+ "p"+ "> Added " + Course[i].name + " with course code "+ Course[i].code + "  <button id="+ i + "p" + " "+'onClick="deleteMe('+ i +')"' +'> Delete </button>'   + "  <button id="+ i + "p" +  " "+'onClick="editeMe('+ i +')"' +'> Edit </button>'+  "<br> </p>");
 
+  $('#'+i).remove();
 }
