@@ -14,7 +14,7 @@ $(document ).ready(function() {
         code : courseCode,
       };
       count++;
-      $( "#addCards" ).append( "<li><p id=" +i+"p"+  "> Added " + Course[i].name + " with course code "+ Course[i].code + "  <button id="+ i +  " "+'onClick="deleteMe('+ i +')"' +'> Delete </button>'   + "  <button id="+ i +  " "+'onclick="editMe('+ i +')"' +'> Edit </button>'+  "<br> </p></li>");
+      $( "#addCards" ).append( "<span><p id=" +i+"p"+  "> Added " + Course[i].name + " with course code "+ Course[i].code + "  <button id="+ i +  " "+'onClick="deleteMe('+ i +')"' +'> Delete </button>'   + "  <button id="+ i +  " "+'onclick="editMe('+ i +')"' +'> Edit </button>'+  "<br> </p></span>");
       i++;
     });
 
@@ -24,30 +24,31 @@ function deleteMe(i) {
   delete Course[i];
   // Course.splice(0,1);
   // Course.splice(i,1);
-  $('#'+i+"p").remove();
+  $('#'+i+"p").parent().remove();
+
   count--;
 };
 function editMe(i) {
   var name = prompt("Enter name....");
   Course[i].name = name;
-  $( "#"+i+"p" ).html( "<li><p id=" +i+ "p"+ "> Added " + "<b>"+ Course[i].name + "</b>" + " with course code "+ Course[i].code + "  <button id="+ i + "p" + " "+'onClick="deleteMe('+ i +')"' +'> Delete </button>'   + "  <button id="+ i + "p" +  " "+'onClick="editMe('+ i +')"' +'> Edit </button>'+  "<br> </p><li>");
+  $( "#"+i+"p" ).html( "<span><p id=" +i+ "p"+ "> Added " + "<cname>"+ Course[i].name + "</cname>" + " with course code "+ Course[i].code + "  <button id="+ i + "p" + " "+'onClick="deleteMe('+ i +')"' +'> Delete </button>'   + "  <button id="+ i + "p" +  " "+'onClick="editMe('+ i +')"' +'> Edit </button>'+  "<br> </p><span>");
 }
 
 function searchAll() {
   console.log("Input keyup");
-  var input, filter, ul, li, p, i;
+  var input, filter, div, span, p, i;
   input = document.getElementById('inputTake');
   filter = input.value.toUpperCase();
-  ul = document.getElementById("addCards");
-  li = ul.getElementsByTagName('li');
-  for (i = 0; i < li.length; i++) {
-      p = li[i].getElementsByTagName("p")[0];
-      console.log("val of p is "+ p.innerHTML);
-      // a =  li[i].getElementById('sarchMe');
+  div = document.getElementById("addCards");
+  span = div.getElementsByTagName('span');
+  for (i = 0; i < span.length; i++) {
+      p = span[i].getElementsByTagName("p")[0];
+      // console.log(p.innerHTML);
+      // a =  li[i].getElementById('searchMe');
       if (p.innerHTML.toUpperCase().indexOf(filter) > -1) {
-          li[i].style.display = "";
+          span[i].style.display = "";
       } else {
-          li[i].style.display = "none";
+          span[i].style.display = "none";
       }
   }
 }
